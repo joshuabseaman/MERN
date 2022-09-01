@@ -34,7 +34,7 @@
         document.getElementById("hover-this").onmouseover = () => {
             setBackgroundColorById("body", "red");
         }
-        document.getElementById("hover-this").onmouseout = function(){
+        document.getElementById("hover-this").onmouseout = () => {
             setBackgroundColorById("body", "white");
         }
         const getValueFromId = (id) => {
