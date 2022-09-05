@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header{
+    background-color: green;
+    height: 120px;
+    margin: 20px;
+}
+
+.main{
+    height: 500px;
+    width: 76%;
+    margin-bottom: 10px;
+    display: inline-block;
+    background-color: red;
+    
+}
+
+.navigation{
+    height: 400px;
+    width: 20%;
+    margin: 0 20px 20px 20px ;
+    display: inline-flex;
+    background-color: blue;
+    vertical-align: top;
+}
+
+.subContents{
+    background-color: yellow;
+    height:300px;
+    width: 300px;
+    margin: 20px 41px 0 20px;
+    display: inline-flex;
+}
+
+.advertisement{
+    height: 140px;
+    margin: 20px;
+    background-color: gray;
+}
