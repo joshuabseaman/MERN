@@ -2,14 +2,10 @@ import React, {useState} from "react";
 
 function Todo() {
     const [todo, setTodo] = useState("");
-
     const [allTodos, setAllTodos] = useState([]);
 
-    const submission = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        if (todo.length === 0) {
-            return;
-        }
         const todoItem = {
             text: todo,
             complete: false
@@ -20,10 +16,10 @@ function Todo() {
     };
 
     const deleteTodo = (index) => {
-        const fillteredtodos = allTodos.filter((allTodos, i) => {
+        const filteredTodos = allTodos.filter((allTodos, i) => {
             return i !== index;
         });
-        setAllTodos(fillteredtodos);
+        setAllTodos(filteredTodos);
     };
 
     const checkedComplete = (index) => {
@@ -39,24 +35,24 @@ function Todo() {
     };
     return (
         <div>
-            <form on onSubmit={submission}>
+            <form onSubmit={handleSubmit}>
                 <input type="text" name="" id="" onChange={(e) => { setTodo(e.target.value); } } />
                 {todo.length < 2 && todo.length > 0 ?
-                    <p>must be longer than 1 characters</p> : null}
-                <button style={{ marginLeft: "10px" }}>Add</button>
+                    <p>Must be more than 1 character</p> : null}
+                <button>Add</button>
             </form>
-            {allTodos.map((t, i) => {
+            {allTodos.map((all, i) => {
                 const todoClass = [];
-                if (t.complete){
+                if (all.complete){
                     todoClass.push('line',"bold")
                 }
                 return (
                     <div key={i}>
-                        <span className={todoClass.join(" ")} >{t.text}</span>
+                        <span className={todoClass.join(" ")} >{all.text}</span>
                         <input onChange={(e) => {
                             checkedComplete(i);
-                        } } checked={t.complete} type="checkbox" />
-                        <button onClick={() => { deleteTodo(i); } } style={{ marginLeft: "10px" }}>delete</button>
+                        } } checked={all.complete} type="checkbox" />
+                        <button onClick={() => { deleteTodo(i); } }>delete</button>
                     </div>
                 );
             })}
