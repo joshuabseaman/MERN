@@ -52,7 +52,7 @@ function Todo() {
                         <input onChange={(e) => {
                             checkedComplete(i);
                         } } checked={all.complete} type="checkbox" />
-                        <button onClick={() => { deleteTodo(i); } }>delete</button>
+                        <button onClick={() => { deleteTodo(i); } }>Delete</button>
                     </div>
                 );
             })}
