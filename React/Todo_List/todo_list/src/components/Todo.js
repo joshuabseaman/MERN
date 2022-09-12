@@ -1,58 +1,59 @@
 import React, {useState} from "react";
 
-function Todo() {
-    const [todo, setTodo] = useState("");
-    const [allTodos, setAllTodos] = useState([]);
+const Todo = (props) => {
+    const [newTodo, setNewTodo] = useState("");
+    const [todos, setTodos] = useState([]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleNewTodoSubmit = (event) => {
+        event.preventDefault();
+        if (newTodo.length < 1) {
+            return;
+        };
         const todoItem = {
-            text: todo,
+            text: newTodo,
             complete: false
         };
-        console.log(todo);
-        setAllTodos([...allTodos, todoItem]);
-        console.log(allTodos);
+        setTodos([...todos, todoItem]);
+        setNewTodo("");
     };
 
-    const deleteTodo = (index) => {
-        const filteredTodos = allTodos.filter((allTodos, i) => {
-            return i !== index;
+    const handleTodoDelete = (delIdx) => {
+        const filteredTodos = todos.filter((_todo, i) => {
+            return i !== delIdx;
         });
-        setAllTodos(filteredTodos);
+        setTodos(filteredTodos);
     };
 
-    const checkedComplete = (index) => {
-        const updatedTodo = allTodos.map((allTodos, i) => {
-            if (index === i) {
-                allTodos.complete = !allTodos.complete;
+    const handleToggleComplete = (idx) => {
+        const updatedTodos = todos.map((todo, i) => {
+            if (idx === i) {
+                todo.complete = !todo.complete;
             }
-
-            return allTodos;
-
+            return todo;
         });
-        setAllTodos(updatedTodo);
+        setTodos(updatedTodos);
     };
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="" id="" onChange={(e) => { setTodo(e.target.value); } } />
-                {todo.length < 2 && todo.length > 0 ?
-                    <p>Must be more than 1 character</p> : null}
+            <form onSubmit={(event) => handleNewTodoSubmit(event)}>
+                <input type="text" value={newTodo} onChange={(event) => {setNewTodo(event.target.value);}} />
                 <button>Add</button>
             </form>
-            {allTodos.map((all, i) => {
-                const todoClass = [];
-                if (all.complete){
-                    todoClass.push('line',"bold")
+
+            <hr />
+
+            {todos.map((todo, i) => {
+                const todoClasses = ["bold", "italic"];
+                if (todo.complete) {
+                    todoClasses.push("line-through");
                 }
                 return (
                     <div key={i}>
-                        <span className={todoClass.join(" ")} >{all.text}</span>
-                        <input onChange={(e) => {
-                            checkedComplete(i);
-                        } } checked={all.complete} type="checkbox" />
-                        <button onClick={() => { deleteTodo(i); } }>Delete</button>
+                        <input onChange={(event) => {
+                            handleToggleComplete(i);
+                        }} checked={todo.complete} type="checkbox" />
+                        <span className={todoClasses.join(" ")}>{todo.text}</span>
+                        <button style={{marginLeft: "10px"}} onClick={(event) => {handleTodoDelete(i);}}>Delete</button>
                     </div>
                 );
             })}
