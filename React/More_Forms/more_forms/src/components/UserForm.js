@@ -6,15 +6,17 @@ const UserForm = (props) => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false);
     const [firstNameError, setFirstNameError] = useState("");
     const [lastNameError, setLastNameError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
     const createUser = (e) => {
         e.preventDefault();
-        const newUser = { firstName, lastName, email, password};
+        const newUser = { firstName, lastName, email, password, confirmPassword};
         console.log("Welcome", newUser);
         setHasBeenSubmitted(true);
     };
@@ -60,6 +62,15 @@ const UserForm = (props) => {
             setPasswordError("password must be 3 characters or longer!");
         } else {
             setPasswordError("");
+        }
+    };
+
+    const handleConfirmPassword = (e) => {
+        setConfirmPassword(e.target.value);
+        if(e.target.value !== password) {
+            setConfirmPasswordError("Passwords must match!");
+        } else {
+            setConfirmPasswordError("");
         }
     };
 
@@ -113,10 +124,10 @@ const UserForm = (props) => {
                 </div>
                 <div>
                     <label>Confirm Password: </label>
-                    <input type="text" onChange={ handlePassword } />
+                    <input type="text" onChange={ handleConfirmPassword } />
                     {
-                        passwordError ?
-                        <p style={{color:'red'}}>{ passwordError }</p> :
+                        confirmPasswordError ?
+                        <p style={{color:'red'}}>{ confirmPasswordError }</p> :
                         ''
                     }
                 </div>
@@ -129,7 +140,7 @@ const UserForm = (props) => {
                 <p>Last Name: { lastName }</p>
                 <p>Email: { email }</p>
                 <p>Password: { password }</p>
-                <p>Confirm Password: { password }</p>
+                <p>Confirm Password: { confirmPassword }</p>
             </div>
         </div>
     );
