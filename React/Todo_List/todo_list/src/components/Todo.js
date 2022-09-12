@@ -1,10 +1,8 @@
 import React, {useState} from "react";
 
 function Todo() {
-    // for creating 
     const [todo, setTodo] = useState("");
 
-    // for updating or removing 
     const [allTodos, setAllTodos] = useState([]);
 
     const submission = (e) => {
@@ -17,12 +15,10 @@ function Todo() {
             complete: false
         };
         console.log(todo);
-        // grabbing all todos with ...  then adding a new todo 
         setAllTodos([...allTodos, todoItem]);
         console.log(allTodos);
     };
 
-    // for deleting 
     const deleteTodo = (index) => {
         const fillteredtodos = allTodos.filter((allTodos, i) => {
             return i !== index;
@@ -30,13 +26,10 @@ function Todo() {
         setAllTodos(fillteredtodos);
     };
 
-    // for updating
     const checkedComplete = (index) => {
         const updatedTodo = allTodos.map((allTodos, i) => {
             if (index === i) {
                 allTodos.complete = !allTodos.complete;
-                // const updated = {...todo, complete: !todo.complete}
-                // return updated
             }
 
             return allTodos;
