@@ -34,6 +34,7 @@ const Search = (props) => {
                 <label htmlFor="id">ID: </label>
                 <input type="number" name="id" value={numberId} onChange={(e) => setNumberId(e.target.value)}></input>
                 <button>Search</button>
+                <hr />
             </form>
         </div>
     )

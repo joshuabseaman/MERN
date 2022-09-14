@@ -33,7 +33,6 @@ const People = (props) => {
             }
             { error &&
             <>
-            <h2>These aren't the droids you're looking for</h2>
             <img src="https://www.meme-arsenal.com/memes/52577612a290566287f2273992fa918e.jpg" alt="Obi-Wan_kenobi" />
             </>
             }
